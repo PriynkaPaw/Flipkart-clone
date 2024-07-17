@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const userSchema = mongoose.Schema({
+const createUserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -43,12 +43,12 @@ const userSchema = mongoose.Schema({
   },
 });
 
-userSchema.virtual("id").get(function () {
+createUserSchema.virtual("id").get(function () {
   return this._id.toHexString();
 });
 
-userSchema.set("toJSON", {
+createUserSchema.set("toJSON", {
   virtuals: true,
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("CreateUser", createUserSchema);
