@@ -52,7 +52,6 @@ const CartItem = () => {
 
   const cartId = useSelector((state) => state.addProductToCart?.cartData);
   useEffect(() => {
-    // Fetch cart data when component mounts
     dispatch(getCartData());
   }, [dispatch]);
 
