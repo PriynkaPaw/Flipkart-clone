@@ -1,8 +1,11 @@
 // GroupedButton.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ButtonGroup, Button, styled } from "@mui/material";
-import { useSelector, useDispatch } from "react-redux";
-import { incrementQuantity, decrementQuantity } from "../../slice/cartSlice";
+import { useDispatch } from "react-redux";
+import {
+  getCartData,
+  updateCartProductQty,
+} from "../../reducer/cartListReducer";
 
 const Component = styled(ButtonGroup)`
   margin-top: 30px;
@@ -12,37 +15,62 @@ const StyledButton = styled(Button)`
   border-radius: 50%;
 `;
 
-const GroupedButton = ({ dataId }) => {
+const GroupedButton = ({ cartId, productId, price, qty }) => {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.addCart?.cart);
 
-  const initialCount = cart.find(item => item.id === dataId)?.quantity || 1;
-  const [counter, setCounter] = useState(initialCount);
+  // const initialCount = cart.find((item) => item.id === dataId)?.quantity || 1;
+  const [counter, setCounter] = useState(1);
 
-  useEffect(() => {
-    const updatedCount = cart.find(item => item.id === dataId)?.quantity || 1;
-    setCounter(updatedCount);
-  }, [cart, dataId]);
+  // useEffect(() => {
+  //   const updatedCount = cart.find((item) => item.id === dataId)?.quantity || 1;
+  //   setCounter(updatedCount);
+  // }, [cart, dataId]);
 
-  const handleIncrement = (id) => {
-    dispatch(incrementQuantity(id));
+  const handleIncrement = (cartId, productId) => {
+    const updatedQtyChange = 1;
+    dispatch(
+      updateCartProductQty({
+        cartId,
+        productId,
+        price,
+        qtyChange: updatedQtyChange,
+      })
+    ).then(() => {
+      dispatch(getCartData());
+    });
+    console.log("productID and cartId in gb", cartId, productId);
     setCounter((prevCount) => prevCount + 1);
   };
 
-  const handleDecrement = (id) => {
+  const handleDecrement = (cartId, productId) => {
     if (counter > 1) {
-      dispatch(decrementQuantity(id));
+      const updatedQtyChange = -1;
+      dispatch(
+        updateCartProductQty({
+          cartId,
+          productId,
+          price,
+          qtyChange: updatedQtyChange,
+        })
+      ).then(() => {
+        dispatch(getCartData());
+      });
       setCounter((prevCount) => prevCount - 1);
     }
   };
 
   return (
     <Component>
-      <StyledButton onClick={() => handleDecrement(dataId)} disabled={counter === 1}>
+      <StyledButton
+        onClick={() => handleDecrement(cartId, productId, price)}
+        disabled={counter === 1}
+      >
         -
       </StyledButton>
-      <Button disabled>{counter}</Button>
-      <StyledButton onClick={() => handleIncrement(dataId)}>+</StyledButton>
+      <Button disabled>{qty}</Button>
+      <StyledButton onClick={() => handleIncrement(cartId, productId, price)}>
+        +
+      </StyledButton>
     </Component>
   );
 };

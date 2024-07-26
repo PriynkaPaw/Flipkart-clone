@@ -16,6 +16,7 @@ const authJwt = require("./helper/jwt");
 const cors = require("cors");
 const errorHandler = require("./helper/errorHandler");
 const orderRouter = require("./routers/order");
+const cartProductRouter = require("./routers/cartItemRouter");
 const path = require("path");
 
 // Middleware
@@ -35,6 +36,7 @@ app.use(`${api}/order`, orderRouter);
 app.use(`${api}/subCategory`, subCategoryRouter);
 app.use(`${api}/admin`, adminRouter);
 app.use(`${api}/admin/createuser`, CreateUserByAdminRouter);
+app.use(`${api}/user/cart-item`, cartProductRouter);
 
 app.use(
   "/public/uploads",

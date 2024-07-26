@@ -1,10 +1,10 @@
 import { Card, Box, Typography, Button, styled } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { removeFromCart } from "../../slice/cartSlice";
 import GroupButton from "./GroupButton";
 import axios from "axios";
+import { deleteCartProduct, getCartData } from "../../reducer/cartListReducer";
 
 const Component = styled(Card)`
   border-top: 1px solid #f0f0f0;
@@ -45,16 +45,21 @@ const Remove = styled(Button)`
 const CartItem = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [selectId, setSelectId] = useState();
 
-  const cart = useSelector((state) => state.addCart?.cart);
-  const removeItemFromCart = (id) => {
-    dispatch(removeFromCart(id));
+  const removeItemFromCart = (cartId, productId) => {
+    dispatch(deleteCartProduct({ cartId, productId }));
   };
 
+  const cartId = useSelector((state) => state.addProductToCart?.cartData);
   useEffect(() => {
-    console.log("Getting data in Cart  =>", cart);
-  }, [cart]);
+    // Fetch cart data when component mounts
+    dispatch(getCartData());
+  }, [dispatch]);
+
+  const cartDetails = useSelector(
+    (state) => state.getCartData?.cartData?.items
+  );
+  console.log("cartDetails", cartDetails);
 
   const fassured =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png";
@@ -64,6 +69,7 @@ const CartItem = () => {
       const data = await getProductById(id);
       localStorage.setItem("productId", id);
       navigate("/electronics/info", { state: { data } });
+      return data;
     } catch (error) {
       console.log("error ==>", error);
     }
@@ -71,26 +77,37 @@ const CartItem = () => {
 
   return (
     <Component>
-      {cart?.map((item, i) => (
+      {cartDetails?.map((item, i) => (
         <div key={i}>
           <LeftComponent>
             <img
-              onClick={() => onClickButton(item?.id)}
+              onClick={() => onClickButton(item?.productId._id)}
               src={item?.image}
+              alt=""
               style={{ height: 110, width: 110 }}
             />
-            <GroupButton dataId={item.id} />
+            {console.log("productIDDDDD=>", item)}
+            <GroupButton
+              cartId={cartId._id}
+              productId={item.productId._id}
+              price={item.price}
+              qty={item.qty}
+            />
           </LeftComponent>
           <Box style={{ margin: 20 }}>
-            <Typography>₹{parseInt(item?.price)}</Typography>
+            <Typography>₹{item?.productId.price}</Typography>
             <SmallText>
               Seller: RetailNet
               <span>
-                <img src={fassured} style={{ width: 50, marginLeft: 10 }} />
+                <img
+                  src={fassured}
+                  alt=""
+                  style={{ width: 50, marginLeft: 10 }}
+                />
               </span>
             </SmallText>
             <Typography style={{ margin: "20px 0" }}>
-              <Cost component="span">₹ {parseInt(item?.totalPrice)} </Cost>
+              <Cost component="span">₹ {parseInt(item?.total_Price)} </Cost>
               &nbsp;&nbsp;&nbsp;
               <MRP component="span">
                 <strike>₹7000</strike>
@@ -98,7 +115,11 @@ const CartItem = () => {
               &nbsp;&nbsp;&nbsp;
               <Discount component="span">20 % off</Discount>
             </Typography>
-            <Remove onClick={() => removeItemFromCart(item.id)}>Remove</Remove>
+            <Remove
+              onClick={() => removeItemFromCart(cartId._id, item.productId._id)}
+            >
+              Remove
+            </Remove>
           </Box>
         </div>
       ))}

@@ -65,7 +65,6 @@ route.post("/login", async (req, res) => {
         expiresIn: "8d",
       }
     );
-    console.log("Roleee", user.role);
 
     res
       .status(200)

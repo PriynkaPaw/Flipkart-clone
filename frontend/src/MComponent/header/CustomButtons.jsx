@@ -92,15 +92,21 @@ const CustomButtons = () => {
       )}
       <Typography style={{ marginTop: 3 }}>More</Typography>
       <Container to="/cart">
-        <div className="">
-          <p className="text-white bg-red-400 rounded-md px-1 w-[20px] h-[20px] pt-[2px] pl-[5px] font-bold">
-            {cart.length}
-          </p>
-        </div>
-        <Badge color="secondary">
-          <ShoppingCart />
-        </Badge>
-        <Typography style={{ marginLeft: 10 }}>Cart</Typography>
+        {isLogin ? (
+          <>
+            <div className="">
+              <p className="text-white bg-red-400 rounded-md px-1 w-[20px] h-[20px] pt-[2px] pl-[5px] font-bold">
+                {cart.length}
+              </p>
+            </div>
+            <Badge color="secondary">
+              <ShoppingCart />
+            </Badge>
+            <Typography style={{ marginLeft: 10 }}>Cart</Typography>
+          </>
+        ) : (
+          ""
+        )}
       </Container>
     </Wrapper>
   );

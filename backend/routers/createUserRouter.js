@@ -50,7 +50,6 @@ route.post("/", async (req, res) => {
 route.post("/login", async (req, res) => {
   const user = await CreateUser.findOne({ email: req.body.email });
   const secret = process.env.SECRET_KEY;
-  console.log("Userrr", user);
   if (!user) {
     return res.status(400).json({ success: false, message: "User not found" });
   }

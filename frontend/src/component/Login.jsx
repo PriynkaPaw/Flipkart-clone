@@ -20,10 +20,9 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newRecord = { ...formData };
-    console.log("Login FormData  ", formData);
 
     setrecord({ ...record, newRecord });
-    console.log("FormData  ", formData);
+
     setFormError(validate(newRecord));
     setIsSubmit(true);
 
@@ -35,7 +34,6 @@ function Login() {
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log("res.message=>", res);
           if (res.message) {
             setIsLogin("User Not Found, Please check Id and password");
           } else {
@@ -43,7 +41,7 @@ function Login() {
 
             localStorage.setItem("userId", res.userID);
             localStorage.setItem("islogin", data);
-            localStorage.setItem('role',res.role)
+            localStorage.setItem("role", res.role);
 
             setIsLogin("");
 
