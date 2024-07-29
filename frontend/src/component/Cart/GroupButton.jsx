@@ -35,15 +35,12 @@ const GroupedButton = ({ cartId, productId, price, qty }) => {
         price,
         qtyChange: updatedQtyChange,
       })
-    ).then(() => {
-      dispatch(getCartData());
-    });
-    console.log("productID and cartId in gb", cartId, productId);
+    );
     setCounter((prevCount) => prevCount + 1);
   };
 
   const handleDecrement = (cartId, productId) => {
-    if (counter > 1) {
+    if (qty > 1) {
       const updatedQtyChange = -1;
       dispatch(
         updateCartProductQty({
@@ -52,9 +49,7 @@ const GroupedButton = ({ cartId, productId, price, qty }) => {
           price,
           qtyChange: updatedQtyChange,
         })
-      ).then(() => {
-        dispatch(getCartData());
-      });
+      );
       setCounter((prevCount) => prevCount - 1);
     }
   };
@@ -63,7 +58,7 @@ const GroupedButton = ({ cartId, productId, price, qty }) => {
     <Component>
       <StyledButton
         onClick={() => handleDecrement(cartId, productId, price)}
-        disabled={counter === 1}
+        // disabled={counter === 1}
       >
         -
       </StyledButton>

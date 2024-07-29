@@ -10,7 +10,7 @@ function OrderDetails() {
   const prodcutId = localStorage.getItem("productId");
   const productList = useSelector((state) => state.getProduct?.data);
   const productDetails = productList.find(
-    (productID) => productID._id == prodcutId
+    (productID) => productID._id === prodcutId
   );
 
   const userId = localStorage.getItem("userId");
@@ -32,9 +32,7 @@ function OrderDetails() {
     fetchData();
   }, []);
 
-  console.log("Usersss,", user);
-  const userData = user?.find((userdata) => userdata._id == userId);
-  // console.log('userData: ', userData);
+  const userData = user?.find((userdata) => userdata._id === userId);
 
   return (
     <>
@@ -45,7 +43,7 @@ function OrderDetails() {
             Order Details
           </h1>
           <div className="h-[90px] mt-[50px] ml-[120px]">
-            <img className="h-full" src={product?.image} />
+            <img className="h-full" alt="" src={product?.image} />
           </div>
           <div className="ml-[50px] mt-[20px]">
             <h1 className="text-xl mb-2">{product?.name}</h1>
@@ -79,5 +77,3 @@ function OrderDetails() {
 }
 
 export default OrderDetails;
-
-const getUsers = async () => {};

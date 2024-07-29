@@ -46,10 +46,15 @@ const CartItem = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const removeItemFromCart = (cartId, productId) => {
-    dispatch(deleteCartProduct({ cartId, productId }));
+  const removeItemFromCart = async (cartId, productId) => {
+    try {
+      await dispatch(deleteCartProduct({ cartId, productId }));
+      // Dispatch to get updated cart data
+      dispatch(getCartData());
+    } catch (error) {
+      console.log("Error removing item from cart", error);
+    }
   };
-
   const cartId = useSelector((state) => state.addProductToCart?.cartData);
   useEffect(() => {
     dispatch(getCartData());
@@ -58,7 +63,6 @@ const CartItem = () => {
   const cartDetails = useSelector(
     (state) => state.getCartData?.cartData?.items
   );
-  console.log("cartDetails", cartDetails);
 
   const fassured =
     "https://static-assets-web.flixcart.com/www/linchpin/fk-cp-zion/img/fa_62673a.png";
@@ -85,7 +89,7 @@ const CartItem = () => {
               alt=""
               style={{ height: 110, width: 110 }}
             />
-            {console.log("productIDDDDD=>", item)}
+
             <GroupButton
               cartId={cartId._id}
               productId={item.productId._id}

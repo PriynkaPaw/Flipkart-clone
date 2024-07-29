@@ -5,7 +5,6 @@ import {
   fetchCategories,
   getSubCategories,
 } from "../reducer/Product_Reducer";
-import { useNavigate } from "react-router-dom";
 function SubmitProductForm() {
   const dispatch = useDispatch();
 
@@ -48,8 +47,6 @@ function SubmitProductForm() {
       image: file,
     }));
   };
-
-  const navigate = useNavigate();
 
   const Onsubmit = async (e) => {
     e.preventDefault();

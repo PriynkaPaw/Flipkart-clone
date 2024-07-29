@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import logo from "../logo.svg";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 function RegisterUser() {
   return (
     <div>
@@ -23,7 +23,7 @@ function RegistrationForm() {
     password: "",
     street: "",
     apartment: "",
-    city: "",
+
     zip: "",
     country: "",
     role: "user",
@@ -33,13 +33,11 @@ function RegistrationForm() {
     const name = e.target.name;
     const value = e.target.value;
     setFormData({ ...formData, [name]: value });
-    console.log("formdata ", formData.name);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newRecord = { ...formData };
-    console.log("Regitered FormData  ", formData);
     setFormError(validate(newRecord));
 
     setFormData({ ...formData, newRecord }); // review
@@ -102,7 +100,7 @@ function RegistrationForm() {
     <section className="bg-gray-50 dark:bg-gray-00">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <a
-          href="#"
+          href="/"
           className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-gray-500"
         >
           <img className="w-12 h-16 mr-2" src={logo} alt="logo" />
@@ -312,7 +310,7 @@ function RegistrationForm() {
                     I accept the{" "}
                     <a
                       className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                      href="#"
+                      href="/"
                     >
                       Terms and Conditions
                     </a>
@@ -328,7 +326,7 @@ function RegistrationForm() {
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Already have an account?{" "}
                 <a
-                  href="#"
+                  href="/"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Login here

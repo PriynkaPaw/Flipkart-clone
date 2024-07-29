@@ -58,12 +58,9 @@ export const deleteCartProduct = createAsyncThunk(
       await axios.delete(
         `http://localhost:4441/api/v1/user/cart-item/${cartId}/${productId}`
       );
-      console.log("cartId in reducer", cartId);
-      console.log("productId in reducer", productId);
 
       return { cartId, productId };
     } catch (error) {
-      console.log("Value");
       console.log("ERROR IN Delete API", error);
       throw error;
     }

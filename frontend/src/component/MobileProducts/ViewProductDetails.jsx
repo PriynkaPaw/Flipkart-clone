@@ -8,13 +8,12 @@ import { addProductToCart } from "../../reducer/cartListReducer";
 function ViewProductDetails() {
   const location = useLocation();
   const { data } = location.state;
-  console.log("data: ", data);
 
   const dispatch = useDispatch();
   const [isLogin, setIsLogin] = useState();
   const [checkRole, setCheckRole] = useState("");
   const cart = useSelector((state) => state.addCart?.cart);
-  // console.log('cart: adddddd', cart);
+
   const userID = localStorage.getItem("userId");
   const [cartData, setCartData] = useState({
     userId: userID,
@@ -42,8 +41,6 @@ function ViewProductDetails() {
 
   const handleOnclick = () => {
     // dispatch(addToCart(data));
-
-    console.log("cartt", cart);
   };
   const navigate = useNavigate();
 

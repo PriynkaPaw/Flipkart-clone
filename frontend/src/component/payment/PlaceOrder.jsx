@@ -63,7 +63,7 @@ const AddAddressForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(postOrder(formData));
-    const { name, value } = e.target;
+    const { name } = e.target;
 
     setFormData((prevState) => ({
       ...prevState,

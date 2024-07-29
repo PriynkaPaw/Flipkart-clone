@@ -41,13 +41,11 @@ function RegistrationForm() {
     const name = e.target.name;
     const value = e.target.value;
     setFormData({ ...formData, [name]: value });
-    console.log("formdata ", formData.name);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newRecord = { ...formData };
-    console.log("Regitered FormData  ", formData);
     setFormError(validate(newRecord));
 
     setFormData({ ...formData, newRecord });
@@ -102,10 +100,6 @@ function RegistrationForm() {
     <section className="bg-gray-50 dark:bg-gray-100">
       {isSubmit}
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 mt-[100px]">
-        {/* <a href="#" className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-gray-500">
-                    <img className="w-12 h-16 mr-2" src={logo} alt="logo" />
-                    Shopping Site
-                </a> */}
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-400 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">

@@ -17,7 +17,6 @@ function PayNow() {
     });
 
     const order = await response.json();
-    console.log(order);
 
     var options = {
       key: "rzp_test_LmqAFpCfXgEafs", // Enter the Key ID generated from the Dashboard

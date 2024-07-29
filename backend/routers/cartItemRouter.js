@@ -136,8 +136,7 @@ router.put("/:cartId/:productId", async (req, res) => {
       {
         $inc: {
           "items.$.qty": isNaN(qtyChange) ? 0 : qtyChange,
-          // "items.$.total_Price": qtyChange * req.body.price,
-          "items.$.total_Price": isNaN(req.body.price) ? 0 : req.body.price,
+          "items.$.total_Price": qtyChange * req.body.price,
         },
         $set: {
           updatedAt: new Date(),

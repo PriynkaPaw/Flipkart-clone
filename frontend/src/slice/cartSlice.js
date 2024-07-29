@@ -13,14 +13,12 @@ const cartSlice = createSlice({
       // state.cart.push(action.payload);
       const newItem = action.payload;
       const existingItem = state.cart.find((item) => item.id === newItem.id);
-      console.log("cartSlice", newItem.price);
       state.totalPrice += newItem.price * newItem.quantity;
       if (existingItem) {
         existingItem.quantity += newItem.quantity;
       } else {
         state.cart.push(newItem);
       }
-      console.log("cartSlice", state.cart);
     },
     removeFromCart: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);

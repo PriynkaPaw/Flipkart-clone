@@ -52,13 +52,9 @@ const usersSlice = createSlice({
 
       // Delete User
       .addCase(deleteUser.fulfilled, (state, action) => {
-        console.log("State.data", state.data);
-        console.log("State.data22222", action);
         state.data = state.data.filter(
           (user) => user?._id !== action.payload?.id
         );
-        // console.log("fsdfsdffd",user)
-        // state.data = [];
       })
 
       // Post Permissions
@@ -90,9 +86,6 @@ const usersSlice = createSlice({
       // Delete Permissions
 
       .addCase(deletePermission.fulfilled, (state, action) => {
-        console.log("State.data", state.permissions);
-        console.log("State.permission", action);
-
         state.permissions = state.permissions?.filter(
           (permission) => permission?.data?._id !== action.payload?._id
         );
@@ -115,9 +108,6 @@ const usersSlice = createSlice({
       // Delete Role
 
       .addCase(deleteRoles.fulfilled, (state, action) => {
-        console.log("State.data", state.permissions);
-        console.log("State.permission", action);
-
         state.role = state.role?.filter(
           (roles) => roles?.data?._id !== action.payload?._id
         );

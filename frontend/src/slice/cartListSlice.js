@@ -55,8 +55,6 @@ const cartItemSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getCartData.fulfilled, (state, action) => {
-        // const cartItemUser = useSelector((state) => state.addProductToCart?.cartData);
-
         state.isLoading = false;
         state.cartData = action.payload;
       })
@@ -88,8 +86,9 @@ const cartItemSlice = createSlice({
       })
       .addCase(updateCartProductQty.fulfilled, (state, action) => {
         const { productId, qtyChange } = action.payload;
+
         const index = state.cartData.items.findIndex(
-          (item) => item.productId === productId
+          (item) => item.productId._id === productId
         );
 
         if (index !== -1) {
