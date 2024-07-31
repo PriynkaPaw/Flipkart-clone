@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Typography, Badge, Button, styled } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { AuthContext } from "../../auth/authContext";
 
 const Container = styled(Link)(({ theme }) => ({
   display: "flex",
@@ -53,7 +54,6 @@ const CustomButtons = () => {
   const [isLogin, setIsLogin] = useState(false);
   const [isRole, setIsRole] = useState("");
   const navigate = useNavigate();
-
   useEffect(() => {
     const checkLogin = localStorage.getItem("islogin");
     setIsLogin(checkLogin === "true");
@@ -67,6 +67,7 @@ const CustomButtons = () => {
       localStorage.setItem("islogin", "false");
       setIsLogin(false);
       localStorage.setItem("userId", "");
+      localStorage.setItem("role", "");
       navigate("/");
     } else {
       navigate("/login");
@@ -78,16 +79,16 @@ const CustomButtons = () => {
       <LoginButton variant="contained" onClick={handleOnclick}>
         {isLogin ? "Logout" : "Login"}
       </LoginButton>
-      {isRole === "user" ? (
-        <Typography style={{ marginTop: 3, width: 135 }}>
-          Become a Seller
-        </Typography>
-      ) : (
+      {isRole === "marchant" ? (
         <Typography
           style={{ marginTop: 3, width: 135 }}
           onClick={() => navigate("/product-from")}
         >
           Add Product
+        </Typography>
+      ) : (
+        <Typography style={{ marginTop: 3, width: 135 }}>
+          Become a Seller
         </Typography>
       )}
       <Typography style={{ marginTop: 3 }}>More</Typography>

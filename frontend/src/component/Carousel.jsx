@@ -20,10 +20,6 @@ function Carousel() {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const goToSlide = (index) => {
-    setCurrentSlide(index);
-  };
-
   const goToPrevSlide = () => {
     setCurrentSlide((currentSlide - 1 + slides.length) % slides.length);
   };

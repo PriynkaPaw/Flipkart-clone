@@ -2,10 +2,7 @@
 import React, { useState } from "react";
 import { ButtonGroup, Button, styled } from "@mui/material";
 import { useDispatch } from "react-redux";
-import {
-  getCartData,
-  updateCartProductQty,
-} from "../../reducer/cartListReducer";
+import { updateCartProductQty } from "../../reducer/cartListReducer";
 
 const Component = styled(ButtonGroup)`
   margin-top: 30px;
@@ -18,13 +15,7 @@ const StyledButton = styled(Button)`
 const GroupedButton = ({ cartId, productId, price, qty }) => {
   const dispatch = useDispatch();
 
-  // const initialCount = cart.find((item) => item.id === dataId)?.quantity || 1;
   const [counter, setCounter] = useState(1);
-
-  // useEffect(() => {
-  //   const updatedCount = cart.find((item) => item.id === dataId)?.quantity || 1;
-  //   setCounter(updatedCount);
-  // }, [cart, dataId]);
 
   const handleIncrement = (cartId, productId) => {
     const updatedQtyChange = 1;

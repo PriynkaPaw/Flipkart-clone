@@ -1,3 +1,5 @@
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import {
   GET_USERS_CREATED_BY_ADMIN,
   POST_USERS_CREATED_BY_ADMIN,
@@ -8,8 +10,6 @@ import {
   ADD_ROLE,
   DELETE_PERMISSION,
 } from "../action-type/Action";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
 // get all users created by admin
 export const getCreatedUsers = createAsyncThunk(

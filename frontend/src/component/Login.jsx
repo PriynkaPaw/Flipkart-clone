@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext, useAuth } from "../auth/authContext";
 
 function Login() {
   const [formData, setFormdata] = useState({
@@ -16,7 +17,7 @@ function Login() {
     const { name, value } = event.target;
     setFormdata((prevFormdata) => ({ ...prevFormdata, [name]: value }));
   };
-
+  const { login } = useAuth();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const newRecord = { ...formData };
@@ -42,9 +43,7 @@ function Login() {
             localStorage.setItem("userId", res.userID);
             localStorage.setItem("islogin", data);
             localStorage.setItem("role", res.role);
-
             setIsLogin("");
-
             navigate("/");
           }
         });
@@ -100,8 +99,10 @@ function Login() {
           />{" "}
           <br /> <br />
           <p className="text-red-500"> {formError.password} </p>
-          <button className="bg-blue-400 text-xl rounded-md h-[36px] w-[80px] pt-[4px]">
-            {" "}
+          <button
+            onClick={login}
+            className="bg-blue-400 text-xl rounded-md h-[36px] w-[80px] pt-[4px]"
+          >
             Login
           </button>
         </form>

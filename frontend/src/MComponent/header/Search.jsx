@@ -32,6 +32,7 @@ const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const handleSearch = () => {
+    console.log("Search Text", searchText);
     if (!searchText.trim()) {
       setSearchResults(productList.name);
     } else {
@@ -56,6 +57,7 @@ const Search = () => {
           onChange={(e) => setSearchText(e.target.value)}
           value={searchText}
         />
+
         <SearchIconWrapper>
           <button onClick={handleSearch}>
             <SearchIcon />

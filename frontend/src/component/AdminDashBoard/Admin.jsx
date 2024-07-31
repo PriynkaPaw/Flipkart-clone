@@ -159,7 +159,7 @@ function Admin() {
           <ul className="flex-1">
             <li>
               <a
-                href="/"
+                href="#"
                 onClick={showUsers}
                 className="block py-2 px-4 text-gray-300 hover:bg-gray-700"
               >
@@ -168,7 +168,7 @@ function Admin() {
             </li>
             <li>
               <a
-                href="/"
+                href="#"
                 onClick={showProducts}
                 className="block py-2 px-4 text-gray-300 hover:bg-gray-700"
               >
@@ -177,7 +177,7 @@ function Admin() {
             </li>
             <li>
               <a
-                href="/"
+                href="#"
                 onClick={showPermissions}
                 className="block py-2 px-4 text-gray-300 hover:bg-gray-700"
               >
@@ -186,7 +186,7 @@ function Admin() {
             </li>
             <li>
               <a
-                href="/"
+                href="#"
                 onClick={showRoles}
                 className="block py-2 px-4 text-gray-300 hover:bg-gray-700"
               >
